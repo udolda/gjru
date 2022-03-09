@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TestApp2.BundleConfig">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.FilterConfig">
+    <Position X="4.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.RouteConfig">
+    <Position X="0.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.Controllers.HomeController">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEBAAAAAAIAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.Controllers.OAuthController">
+    <Position X="7" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQEAAAAAAAQAAAAAAAQABAAAAAAAAAACAQAA=</HashCode>
+      <FileName>Controllers\OAuthController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.Models.TesterModel">
+    <Position X="10.75" Y="2.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="TestApp2.Models.TesterModel.TaskData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\TesterModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAEAAAAAAAAAAAAAEAAAAAAASACCAACAA=</HashCode>
+      <FileName>Models\TesterModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.Models.TokenMolel">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TestApp2.Models.TokenMolel.TokenModel">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\TokenMolel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TokenMolel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestApp2.Tools.GetInfo">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tools\GetInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

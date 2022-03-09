@@ -1,0 +1,13 @@
+﻿@{ ViewBag.Title = "Главное меню"; }
+<h2>Главное меню</h2>
+@Html.ValidationSummary()
+
+<div>
+    @Html.ActionLink("Редактирование анкеты", "EditProfile", "Jobseeker")
+</div>
+<div>
+    @Html.ActionLink("Поиск подходящих вакансий", "FindVacancy", "Jobseeker")
+</div>
+<div>
+    @Html.ActionLink("Просмотр всех вакансий", "ShowVacancies", "Common")
+</div>
