@@ -16,7 +16,6 @@ namespace TestApp2.Controllers
 {
     public class HomeController : Controller
     {
-
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
 
@@ -51,9 +50,42 @@ namespace TestApp2.Controllers
         /// Переход на страницу регистрации
         /// </summary>
         /// <returns>HTML страница регитрации</returns>
-        public ActionResult Registration()
+        public ActionResult Register()
         {
-            return View("Registration");
+            RegistrationViewModel model = new RegistrationViewModel();
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// Стандартный метод для регистрации, дополнен с учетом наличия ролей
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegistrationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role };
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
+                return RedirectToAction("Main", String.Format("{0}", model.Role.ToString()));
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         /// <summary>
@@ -91,8 +123,6 @@ namespace TestApp2.Controllers
 
             return View("Index");
         }
-
-
 
         public ApplicationSignInManager SignInManager
         {
@@ -231,46 +261,6 @@ namespace TestApp2.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View("/JobSeeker/Main");
-        }
-
-        //править
-        ///// <summary>
-        ///// Стандартный метод для регистрации, дополнен с учетом наличия ролей
-        ///// </summary>
-        ///// <param name="model"></param>
-        ///// <returns></returns>
-        ////
-        //// POST: /Account/Register
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Register(RegisterViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role };
-        //        var result = await UserManager.CreateAsync(user, model.Password);
-
-        //        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-        //        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-        //        // Send an email with this link
-        //        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-        //        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-        //        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
-        //        return RedirectToAction("Main", String.Format("{0}", model.Role.ToString()));
-        //    }
-
-        //    // If we got this far, something failed, redisplay form
-        //    return View(model);
-        //}
 
         //
         // GET: /Account/ConfirmEmail
