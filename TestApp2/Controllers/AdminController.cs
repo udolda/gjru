@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
     public class AdminController : Controller
     {
+        private UserRepository userRepository;
+
         // GET: Admin
         public ActionResult Index()
         {
+            if (userRepository.FindByLogin("admin").Password == "Gibibl666")
+            {
+
+            }
+
             return View();
         }
 

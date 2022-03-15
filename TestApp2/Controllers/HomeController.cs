@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TestApp2.Models;
+using TestApp2.Repository;
 using static TestApp2.Models.TokenMolel;
+
+
 
 namespace TestApp2.Controllers
 {
@@ -18,6 +21,12 @@ namespace TestApp2.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
+        private UserRepository userRepository;
+
+        public HomeController(UserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
 
         public ActionResult Index()
         {
@@ -67,6 +76,12 @@ namespace TestApp2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegistrationViewModel model)
         {
+            if (userRepository.FindByLogin("admin") == null)
+            {
+                var user = new User { UserName = "admin", Password = "Gibibl666", Role = role.Admin };
+                var result = await UserManager.CreateAsync(user, model.Password);
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role };
