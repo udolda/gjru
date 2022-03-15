@@ -23,6 +23,7 @@ namespace TestApp2
         }
     }
 
+
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
@@ -32,14 +33,27 @@ namespace TestApp2
         }
     }
 
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+
+    /// <summary>
+    /// Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application
+    /// </summary>
     public class UserManager : UserManager<User, long>
     {
-        public UserManager(IUserStore<User, long> store)
-            : base(store)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="store"></param>
+        public UserManager(IUserStore<User, long> store) : base(store)
         {
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
             var manager = new UserManager(new IdentityStore(context.Get<ISession>()));
@@ -88,14 +102,28 @@ namespace TestApp2
         }
     }
 
-    // Configure the application sign-in manager which is used in this application.
+
+    /// <summary>
+    /// Configure the application sign-in manager which is used in this application
+    /// </summary>
     public class ApplicationSignInManager : SignInManager<User, long>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="authenticationManager"></param>
         public ApplicationSignInManager(UserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
+
         }
 
+        /// <summary>
+        /// Создание пользователя
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>userIIdentity</returns>
         public override async Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

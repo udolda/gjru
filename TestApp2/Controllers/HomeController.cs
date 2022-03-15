@@ -129,14 +129,11 @@ namespace TestApp2.Controllers
         /// Возврат на домашнюю страницу после выхода из аккаунта
         /// </summary>
         /// <returns>HTML главная страница</returns>
-        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
-            var teamPC = (VssConnection)Session["connect"];
-            if (teamPC.HasAuthenticated)
-                teamPC.Disconnect();
-
-            return View("Index");
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Home");
         }
 
         public ApplicationSignInManager SignInManager
@@ -174,60 +171,60 @@ namespace TestApp2.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/Login
+        /// <summary>
+        /// /Account/Login
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        //править
-        ///// <summary>
-        ///// Стандартный метод доработан с учетом ролей
-        ///// </summary>
-        ///// <param name="model"></param>
-        ///// <param name="returnUrl"></param>
-        ///// <returns></returns>
-        ////
-        //// POST: /Account/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
+        /// <summary>
+        /// Standart login method. Modified for the use of roles.
+        /// </summary>
+        /// <param name="model">Model of login view. Contains login and password</param>
+        /// <param name="returnUrl">Url corresponding to the result of the login operation</param>
+        /// <returns>View</returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-        //    // This doesn't count login failures towards account lockout
-        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
-        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-        //    switch (result)
-        //    {
-        //        case SignInStatus.Success:
-        //            try
-        //            {
-        //                var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-        //                //иногда возникает проблема с созданием UserManager. Выглядит как проблема из коробки. Но оно работает само по себе
-        //                return RedirectToAction("Main", String.Format("{0}", role.ToString()));
-        //            }
-        //            catch
-        //            {
-        //                return RedirectToAction("Redirect", "Common");
-        //            }
-        //        case SignInStatus.LockedOut:
-        //            return View("Lockout");
-        //        case SignInStatus.RequiresVerification:
-        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-        //        case SignInStatus.Failure:
-        //        default:
-        //            ModelState.AddModelError("", "Invalid login attempt.");
-        //            return View(model);
-        //    }
-        //}
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    try
+                    {
+                        var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
+                        //иногда возникает проблема с созданием UserManager. Выглядит как проблема из коробки. Но оно работает само по себе
+                        return RedirectToAction("Main", String.Format("{0}", role.ToString()));
+                    }
+                    catch
+                    {
+                        //править
+                        return RedirectToAction("Redirect", "Common");
+                    }
+
+                case SignInStatus.LockedOut: return View("Lockout");
+
+                case SignInStatus.RequiresVerification: return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+        }
 
         //править
         ////
@@ -274,11 +271,12 @@ namespace TestApp2.Controllers
         //    }
         //}
 
-        //
-        // GET: /Account/Register
-
-        //
-        // GET: /Account/ConfirmEmail
+        /// <summary>
+        /// GET: /Account/ConfirmEmail
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(long userId, string code)
         {
@@ -327,16 +325,21 @@ namespace TestApp2.Controllers
         //    return View(model);
         //}
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+        /// <summary>
+        /// GET: /Account/ForgotPasswordConfirmation
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // GET: /Account/ResetPassword
+        /// <summary>
+        /// GET: /Account/ResetPassword
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
@@ -370,8 +373,10 @@ namespace TestApp2.Controllers
         //    return View();
         //}
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
+        /// <summary>
+        /// GET: /Account/ResetPasswordConfirmation
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
@@ -387,16 +392,6 @@ namespace TestApp2.Controllers
         {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
-
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Account");
         }
 
         protected override void Dispose(bool disposing)
@@ -453,6 +448,7 @@ namespace TestApp2.Controllers
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)
             {
+
             }
 
             public ChallengeResult(string provider, string redirectUri, string userId)

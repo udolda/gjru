@@ -383,7 +383,7 @@
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Experience.cs" />
-    <Compile Include="Models\HomeModels.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\TesterModel.cs" />
     <Compile Include="Models\TokenMolel.cs" />
@@ -435,7 +435,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\OAuth\TokenView.cshtml" />
     <Content Include="Views\ReadyForRelease\TestsInfo.cshtml" />

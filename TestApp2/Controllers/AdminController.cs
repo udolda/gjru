@@ -11,8 +11,11 @@ namespace TestApp2.Controllers
     {
         private UserRepository userRepository;
 
-        // GET: Admin
-        public ActionResult Index()
+        /// <summary>
+        /// Возвращает главное меню администратора
+        /// </summary>
+        /// <returns>Main view</returns>
+        public ActionResult Main()
         {
             if (userRepository.FindByLogin("admin").Password == "Gibibl666")
             {

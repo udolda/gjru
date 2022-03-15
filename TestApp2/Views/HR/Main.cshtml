@@ -3,11 +3,8 @@
 @Html.ValidationSummary()
 
 <div>
-    @Html.ActionLink("Редактирование анкеты", "EditProfile", "Jobseeker")
+    @Html.ActionLink("Просмотр анкет кандидатов", "ShowCandidates", "Common")
 </div>
 <div>
-    @Html.ActionLink("Поиск подходящих вакансий", "FindVacancy", "Jobseeker")
-</div>
-<div>
-    @Html.ActionLink("Просмотр всех вакансий", "ShowVacancies", "Common")
+    @Html.ActionLink("Просмотр вакансий", "ShowVacancies", "Common")
 </div>

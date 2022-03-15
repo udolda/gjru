@@ -1,0 +1,58 @@
+﻿@using TestApp2.Models;
+@{
+    ViewBag.Title = "Home Page";
+    string info = Session["info"] == null ? " " : (string)Session["info"];
+}
+@model LoginViewModel
+
+<div class="jumbotron">
+    <h1 align="center">Кадровое агентство</h1>
+    <p align="right" class="lead"> by SeaRune </p>
+
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="wrap-login" align="center">
+            <form class="login-form validate-form">
+                <span class="login-form-title">
+                    Вход
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate="Введите логин">
+                    <input class="input100" type="text" name="Email" placeholder="Логин">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Введите пароль">
+                    <input class="input100" type="password" name="Password" placeholder="Пароль">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="text-center">
+                    <span class="txt1">
+                        Забыли пароль?
+                    </span>
+
+                    <a href="#" class="txt2">
+                        Восстановить
+                    </a>
+                </div>
+
+                <div class="container-login-form-btn">
+                    <input type="submit" value="Войти" class="btn btn-primary btn-large" />
+                </div>
+
+                <div class="flex-col-c">
+                    <span class="txt1">
+                        Нет аккаунта?
+                    </span>
+
+                    <a href=@Url.Action("Register", "Home") class="txt3">
+                        Зарегистрируйтесь
+                    </a>
+                </div>
+            </form>
+        </div>
+    }
+
+</div>

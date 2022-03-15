@@ -6,9 +6,11 @@ using System.Web;
 
 namespace TestApp2.Models
 {
-    public class HomeModels
+    public class HomeViewModels
     {
+
     }
+
 
     public class RegistrationViewModel
     {
@@ -37,4 +39,20 @@ namespace TestApp2.Models
         public role Role { get; set; }
     }
 
+
+    public class LoginViewModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+    }
 }

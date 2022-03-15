@@ -9,7 +9,7 @@ namespace TestApp2.Controllers
     public class JobSeekerController : Controller
     {
         /// <summary>
-        /// Возвращает главное меню рекрутера
+        /// Возвращает главное меню соискателя
         /// </summary>
         /// <returns>Main view</returns>
         public ActionResult Main()
@@ -18,9 +18,9 @@ namespace TestApp2.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Возвращает страницу редактирования профиля соискателя
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Edit profile view</returns>
         public ActionResult EditProfile()
         {
             return View();

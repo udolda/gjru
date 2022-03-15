@@ -8,8 +8,11 @@ namespace TestApp2.Controllers
 {
     public class HRController : Controller
     {
-        // GET: HR
-        public ActionResult Index()
+        /// <summary>
+        /// Возвращает главное меню рекрутера
+        /// </summary>
+        /// <returns>Main view</returns>
+        public ActionResult Main()
         {
             return View();
         }

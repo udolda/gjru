@@ -17,9 +17,9 @@ namespace TestApp2.Repository
 {
     public class UserRepository : Repository<User, JobseekersFilter>
     {
-        public UserRepository(ISession session) :
-            base(session)
+        public UserRepository(ISession session) : base(session)
         {
+
         }
 
         /// <summary>
@@ -41,6 +41,7 @@ namespace TestApp2.Repository
                 return user;
             }
         }
+
         /// <summary>
         /// Позволяет получить текущего пользователя
         /// </summary>
