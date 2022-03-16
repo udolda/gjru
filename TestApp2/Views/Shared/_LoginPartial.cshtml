@@ -4,7 +4,7 @@
 @if (Request.IsAuthenticated)
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Приветствуем, " + User.Identity.GetUserName() + "!", "Manage", "Home")</li>
+        <li>@Html.ActionLink("Домашняя страница " + User.Identity.GetUserName(), "Manage", "Home")</li>
         <li>@Html.ActionLink("Выход", "Logout", "Home")</li>
     </ul>
 }
