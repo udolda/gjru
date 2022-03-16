@@ -28,114 +28,6 @@ namespace TestApp2.Controllers
             this.userRepository = userRepository;
         }
 
-        public ActionResult Index()
-        {
-            //Строки для локального тестирования
-            //var tokens = new TokenModel();
-            //tokens.AccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiJiYTYxM2E0NC0zM2M5LTY0MGUtYjg0Yy1kNWFlNGU3NmIwMzIiLCJzY3AiOiJ2c28uYWdlbnRwb29scyB2c28uYW5hbHl0aWNzIHZzby5hdWRpdGxvZyB2c28uYnVpbGQgdnNvLmNvZGUgdnNvLmRhc2hib2FyZHMgdnNvLmVudGl0bGVtZW50cyB2c28uZXh0ZW5zaW9uIHZzby5leHRlbnNpb24uZGF0YSB2c28uZ3JhcGggdnNvLmlkZW50aXR5IHZzby5sb2FkdGVzdCB2c28ubm90aWZpY2F0aW9uX2RpYWdub3N0aWNzIHZzby5wYWNrYWdpbmcgdnNvLnByb2plY3QgdnNvLnJlbGVhc2UgdnNvLnNlcnZpY2VlbmRwb2ludCB2c28uc3ltYm9scyB2c28udGFza2dyb3Vwc19yZWFkIHZzby50ZXN0IHZzby50b2tlbmFkbWluaXN0cmF0aW9uIHZzby50b2tlbnMgdnNvLnZhcmlhYmxlZ3JvdXBzX3JlYWQgdnNvLndpa2kgdnNvLndvcmsiLCJhdWkiOiJlMDFlNTQ4Zi1lZGQ0LTQyNzMtOTkwNy0xOTQ5YmI5ZGNiMmUiLCJhcHBpZCI6IjY4Y2UxOTJlLTM2YmEtNGJhZS1iNGJkLTA3NTY2ODViN2I1YSIsImlzcyI6ImFwcC52c3Rva2VuLnZpc3VhbHN0dWRpby5jb20iLCJhdWQiOiJhcHAudnN0b2tlbi52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNjA4ODg3NjA0LCJleHAiOjE2MDg4OTEyMDR9.wnLxLZNXOsPdBbN5J5SX13vzbdKiWJdNW6FX7cYYpNHAQRrINT2UfAfhkK7e6CwkeDPcNNND_p636ToD6x9fvADN_T-VfLFWASrgmi0uFvypIRqj2IZWMPui5_10CA2oOPrkzZF5kRbXL4-RyeVOYRWxm464whjanFKOJ4fQYsVeqKU9n1TRfkgLmXqo5-G2bZSeJsowZqiji5MB1uUp6NYaFFW9u8x1S2Nd70NcAdBPQNT2T1fCixm9Zbp4rck7ouVsQx1pYA0iv-SDr38afbADTtFIJa9oRD1gLf-J4Ojb8cngE8Z-0ZkYLywj3U4I9F7o3Flu12vV68LhYrtwjw";
-            //Session["token"] = tokens;
-            if (Session["token"] != null)
-            {
-                Session["access"] = true;
-                var token = (TokenModel)Session["token"];
-                VssConnection connection = new VssConnection(new Uri("https://dev.azure.com/LATeamInc/"), new VssOAuthAccessTokenCredential(token.AccessToken));
-                Session["connect"] = connection;
-                Session["info"] += connection.HasAuthenticated.ToString() + " " + connection.AuthorizedIdentity.DisplayName + " " + token.AccessToken;
-                try
-                {
-                    var witClient = connection.GetClient<WorkItemTrackingHttpClient>();
-                    var hierarchyAccess = witClient.GetQueriesAsync("WorkPractice", depth: 2).Result;
-                }
-                catch (Exception)
-                {
-                    Session["access"] = false;
-                }
-
-            }
-            return View();
-        }
-
-        /// <summary>
-        /// Переход на страницу регистрации
-        /// </summary>
-        /// <returns>HTML страница регитрации</returns>
-        public ActionResult Register()
-        {
-            RegistrationViewModel model = new RegistrationViewModel();
-
-            return View(model);
-        }
-
-        /// <summary>
-        /// Стандартный метод для регистрации, дополнен с учетом наличия ролей
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegistrationViewModel model)
-        {
-            if (userRepository.FindByLogin("admin") == null)
-            {
-                var user = new User { UserName = "admin", Password = "Gibibl666", Role = role.Admin };
-                var result = await UserManager.CreateAsync(user, model.Password);
-            }
-
-            if (ModelState.IsValid)
-            {
-                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role };
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
-                return RedirectToAction("Main", String.Format("{0}", model.Role.ToString()));
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        /// <summary>
-        /// Переход на страницу с информацией
-        /// </summary>
-        /// <returns>HTML страница информации</returns>
-        public ActionResult About()
-        {
-            ViewBag.Message = "Поддробности";
-
-            return View();
-        }
-
-        /// <summary>
-        /// Вовзвращает Manage отображение
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Manage()
-        {
-            ViewBag.HasAccess = Session["access"];
-            
-            return View("Manage");
-        }
-
-        /// <summary>
-        /// Возврат на домашнюю страницу после выхода из аккаунта
-        /// </summary>
-        /// <returns>HTML главная страница</returns>
-        //[ValidateAntiForgeryToken]
-        public ActionResult Logout()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Home");
-        }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -161,20 +53,57 @@ namespace TestApp2.Controllers
         }
 
         /// <summary>
-        /// Метод для перебрасывания в случае проблем со входом
+        /// Переход на страницу регистрации
         /// </summary>
-        /// <returns></returns>
-        public ActionResult EnterError()
+        /// <returns>HTML страница регитрации</returns>
+        public ActionResult Register()
         {
-            ViewBag.Message = @"Кажется, возникли проблемы со входом. Попробуйте перезапустить приложение 
-                                или выйти из учетной записи и зайти снова";
-            return View();
+            RegistrationViewModel model = new RegistrationViewModel();
+
+            return View(model);
         }
 
         /// <summary>
-        /// /Account/Login
+        /// Стандартный метод для регистрации, дополнен с учетом наличия ролей
         /// </summary>
+        /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegistrationViewModel model)
+        {
+            if (userRepository.FindByLogin("admin@gmail.com") == null)
+            {
+                var user = new User { UserName = "admin@gmail.com", Password = "Gibibl666", Role = role.Admin };
+                var result = await UserManager.CreateAsync(user, model.Password);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role };
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
+                return RedirectToAction("Main", String.Format("{0}", model.Role.ToString()));
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        /// <summary>
+        /// Возвращает главную страницу
+        /// </summary>
+        /// <returns>Main view</returns>
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -224,6 +153,50 @@ namespace TestApp2.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+
+        /// <summary>
+        /// Возврат на домашнюю страницу после выхода из аккаунта
+        /// </summary>
+        /// <returns>HTML главная страница</returns>
+        //[ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Home");
+        }
+
+        /// <summary>
+        /// Переход на страницу с информацией
+        /// </summary>
+        /// <returns>HTML страница информации</returns>
+        public ActionResult About()
+        {
+            ViewBag.Message = "Поддробности";
+
+            return View();
+        }
+
+        /// <summary>
+        /// Вовзвращает Manage отображение
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Manage()
+        {
+            ViewBag.HasAccess = Session["access"];
+            
+            return View("Manage");
+        }
+
+        /// <summary>
+        /// Метод для перебрасывания в случае проблем со входом
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EnterError()
+        {
+            ViewBag.Message = @"Кажется, возникли проблемы со входом. Попробуйте перезапустить приложение 
+                                или выйти из учетной записи и зайти снова";
+            return View();
         }
 
         //править

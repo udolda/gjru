@@ -17,7 +17,7 @@ namespace TestApp2.Controllers
         /// <returns>Main view</returns>
         public ActionResult Main()
         {
-            if (userRepository.FindByLogin("admin").Password == "Gibibl666")
+            if (userRepository.FindByLogin("admin@gmail.com").Password == "Gibibl666")
             {
 
             }
