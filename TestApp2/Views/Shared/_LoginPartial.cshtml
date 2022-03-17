@@ -1,10 +1,15 @@
 ﻿@using Microsoft.AspNet.Identity
 @Html.AntiForgeryToken()
 
+@{ 
+
+}
+
 @if (Request.IsAuthenticated)
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Домашняя страница " + User.Identity.GetUserName(), "Manage", "Home")</li>
+        <li>@Html.ActionLink("Домашняя страница " + User.Identity.GetUserName(), "Main")</li>
+        @*<li>@Html.ActionLink("Домашняя страница " + User.Identity.GetUserName(), "Manage", "Home")</li>*@
         <li>@Html.ActionLink("Выход", "Logout", "Home")</li>
     </ul>
 }

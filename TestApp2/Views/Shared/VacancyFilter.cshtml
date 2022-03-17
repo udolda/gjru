@@ -1,0 +1,120 @@
+﻿@model TestApp2.Filters.VacancyFilter
+
+
+@using (Html.BeginForm("ShowVacancies", "Common", FormMethod.Get))
+{
+    <div>
+        Название: @Html.EditorFor(m => m.SearchString)
+    </div>
+
+    <div>
+        Диапазон начала: @Html.EditorFor(m => m.StartDateRange, new { htmlAttributes = new { @class = "form-control date-picker" } })
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <div>
+        Диапазон окончания: @Html.EditorFor(m => m.EndDateRange, new { htmlAttributes = new { @class = "form-control date-picker" } })
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+
+    <div>
+        Компания:
+        <select class="form-control" id="CompanyName" name="CompanyName">
+            <option>Выберите компанию</option>
+        </select>
+        <select name="Model" id="Model"></select>
+    </div>
+    <div>
+         <select class="form-control" id="Experience" name="Experience">
+            <option>Выберите компанию</option>
+         </select>
+         <select name="Model2" id="Model2"></select>
+    </div>
+
+    <div>
+         Со статусами:
+         <label>Активно</label>
+         @Html.CheckBox("Active", false)
+         <label>Закрыто</label>
+         @Html.CheckBox("Blocked", false)
+    </div>
+
+    <div>
+         <input type="submit" value="Поиск" id="ok" />
+    </div>
+}
+
+<script>
+    $(function () {
+        var urlForModels = "/Employer/FillCompany";
+        $("#CompanyName").click(function () {
+            var CompanyNameId = $(this).val();
+            $.getJSON(urlForModels, function (data) {
+                var modelsHtml = "";
+                $.each(data, function (a, b) {
+                    modelsHtml += "<option value='" + b.Id + "'>" + b.Name + "</option>";
+                });
+                $("#Model").html(modelsHtml);
+            });
+        });
+    });
+
+    $(function () {
+        var urlForModels = "/Employer/FillExperience";
+        $("#Experience").click(function () {
+            var ExperienceId = $(this).val();
+            $.getJSON(urlForModels, function (data) {
+                var modelsHtml = "";
+                $.each(data, function (a, b) {
+                    modelsHtml += "<option value='" + b.Id + "'>" + b.Name + "</option>";
+                });
+                $("#Model2").html(modelsHtml);
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#ok").click(function (e) {
+            $.ajax({
+                type: "Post",
+                url: "/Common/GetSelectedItems",
+                data: {
+                    selectedCompany: $("#Model").val(),
+                    selectedExperience: $("#Model2").val(),
+                    name: $('#SearchString').val(),
+
+                },
+                success: function (data) {
+                    $('#v').html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                    alert(errorThrown);
+                }
+            });
+
+            e.preventDefault(); //STOP default action
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".date-picker").datetimepicker({
+            showTodayButton: true,
+            format: 'MM/DD/YYYY'
+        }).on('dp.change', function (e) {
+            $(this).data('DateTimePicker').hide();
+        });
+        $("#setDate").click(function () {
+            $('#.date-picker').data("DateTimePicker").date(moment('15.11.2017', 'DD/MM/YYYY'));
+        });
+
+    });
+</script>

@@ -1,0 +1,73 @@
+﻿@model TestApp2.Models.VacancyListViewModel
+@using TestApp2.Extensions;
+@using TestApp2.Models;
+@using TestApp2.Filters;
+
+<div id="v">
+
+    <table class="table" border="1" align="center">
+        <tr>
+            @if (Model.Vacancies.Count() != 0)
+             {
+                <td>
+                    @Html.SortLink("Название вакансии", "VacancyName", "ShowVacancies", "Common", new RouteValueDictionary { { "Id", Model.Vacancies[0].Id } })
+                </td>
+                <td>
+                    @Html.SortLink("Описание", "VacancyDescription", "ShowVacancies", "Common", new RouteValueDictionary { { "Id", Model.Vacancies[0].Creator.Id } })
+                </td>
+                <td>
+                    @Html.SortLink("Компания", "Company", "ShowVacancies", "Common", new RouteValueDictionary { { "Id", Model.Vacancies[0].Creator.Id } })
+                </td>
+                <td>
+                    @Html.SortLink("Требуемый опыт", "Requirements", "ShowVacancies", "Common", new RouteValueDictionary { })
+                </td>
+                <td>
+                    @Html.SortLink("Начало", "Starts", "ShowVacancies", "Common", new RouteValueDictionary { })
+                </td>
+                <td>
+                    @Html.SortLink("Окончание", "Ends", "ShowVacancies", "Common", new RouteValueDictionary { })
+                </td>
+                <td>
+                    @Html.SortLink("Статус", "Status", "ShowVacancies", "Common", new RouteValueDictionary { })
+                </td>
+             }
+             else
+             {
+                @Html.Label("Похоже, что в системе пока нет сохраненных анкет");
+             }
+        </tr>
+
+        @foreach (var item in Model.Vacancies)
+         {
+            <tr>
+                <td>@item.VacancyName</td>
+                <td>@item.VacancyDescription</td>
+                <td>@item.Company.CompanyName</td>
+                <td>
+                    @foreach (var exp in item.Requirements)
+                     {
+                        @exp.Skill
+                        <br/>
+                     }
+                </td>
+                <td>@item.Starts</td>
+                <td>@item.Ends</td>
+                <td>
+                    @item.Status
+                    <br />
+                    @Html.ActionLink("Изменить статус", "ChangeStatus", "Employer", new { id = item.Id }, null)
+                </td>
+                <td></td>
+                    @if (Model.Role == role.Employee)
+                     {
+                        <td>
+                            @Html.ActionLink("Редактировать вакансию", "EditVacancy", "Employer", new { id = item.Id }, null) |
+                            @Html.ActionLink("Поиск кандидатов", "FindCandidate", "employer", new { id = item.Id }, null)
+                        </td>
+                     }
+            </tr>
+         }
+
+    </table>
+
+</div>

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
-using Microsoft.VisualStudio.Services.OAuth;
-using Microsoft.VisualStudio.Services.WebApi;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using TestApp2.Models;
 using TestApp2.Repository;
-using static TestApp2.Models.TokenMolel;
-
-
 
 namespace TestApp2.Controllers
 {
@@ -196,7 +190,7 @@ namespace TestApp2.Controllers
         {
             ViewBag.Message = @"Кажется, возникли проблемы со входом. Попробуйте перезапустить приложение 
                                 или выйти из учетной записи и зайти снова";
-            return View();
+            return View("Error");
         }
 
         //править

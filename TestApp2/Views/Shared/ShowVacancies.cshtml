@@ -1,0 +1,26 @@
+﻿@model TestApp2.Models.VacancyListViewModel
+@using TestApp2.Models;
+@using TestApp2.Filters
+
+@{ ViewBag.Title = "Список вакансий"; }
+
+<h2>Список вакансий</h2>
+
+<div style="padding: 20px;">
+    @Html.Partial("VacancyFilter", new VacancyFilter())
+</div>
+
+<p>
+    @if (Model.Role == role.Employee)
+    {
+    @Html.ActionLink("Create New", "Createvacancy", "Employer")
+    }
+</p>
+
+<div>
+    @Html.Partial("VacanciesTable", Model)
+</div>
+
+<div>
+    @Html.ActionLink("Назад", "Redirect", "Common")
+</div>

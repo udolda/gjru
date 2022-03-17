@@ -357,13 +357,13 @@
     <Compile Include="App_Start\IdentityStore.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HRController.cs" />
     <Compile Include="Controllers\JobSeekerController.cs" />
-    <Compile Include="Controllers\OAuthController.cs" />
-    <Compile Include="Controllers\ReadyForReleaseController.cs" />
-    <Compile Include="Controllers\TestOnTestController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Filters\BaseFilter.cs" />
     <Compile Include="Filters\DateRange.cs" />
     <Compile Include="Filters\ExperienceFilter.cs" />
@@ -382,19 +382,26 @@
     <Compile Include="Models\BinaryFile.cs" />
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\EmployerViewModel.cs" />
+    <Compile Include="Models\EntityModel.cs" />
     <Compile Include="Models\Experience.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
+    <Compile Include="Models\JobseekerViewModel.cs" />
+    <Compile Include="Models\SortLinkModel.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\TesterModel.cs" />
-    <Compile Include="Models\TokenMolel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vacancy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BinaryFileRepository.cs" />
+    <Compile Include="Repository\CompanyRepository.cs" />
+    <Compile Include="Repository\EmployerRepository.cs" />
+    <Compile Include="Repository\ExperienceRepository.cs" />
     <Compile Include="Repository\FetchOptions.cs" />
+    <Compile Include="Repository\JobseekerRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Tools\GetInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -437,9 +444,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\OAuth\TokenView.cshtml" />
-    <Content Include="Views\ReadyForRelease\TestsInfo.cshtml" />
-    <Content Include="Views\TestOnTest\TestsInfo.cshtml" />
     <Content Include="Views\Home\Manage.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\JobSeeker\Main.cshtml" />
@@ -447,9 +451,16 @@
     <Content Include="Views\HR\Main.cshtml" />
     <Content Include="Views\Employer\Main.cshtml" />
     <Content Include="Views\Admin\Main.cshtml" />
+    <Content Include="Views\JobSeeker\CreateProfile.cshtml" />
+    <Content Include="Views\Shared\ShowVacancies.cshtml" />
+    <Content Include="Views\Shared\VacanciesTable.cshtml" />
+    <Content Include="Views\Shared\AccessError.cshtml" />
+    <Content Include="Views\Shared\VacancyFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
