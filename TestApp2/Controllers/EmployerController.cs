@@ -8,8 +8,11 @@ namespace TestApp2.Controllers
 {
     public class EmployerController : Controller
     {
-        // GET: Employer
-        public ActionResult Index()
+        /// <summary>
+        /// Возвращает главное меню работодателя
+        /// </summary>
+        /// <returns>Main view</returns>
+        public ActionResult Main()
         {
             return View();
         }

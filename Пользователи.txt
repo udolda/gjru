@@ -1,3 +1,5 @@
-admin@gmail.com Gibibl666 Admin
+Пользователи создаются для проверки работы системы.
+adminGJRU@mail.ru Gibibl666 Admin
 Company@gmail.com Mic123Mic HR
 prostoStas@mail.ru Stas1IsSus Jobseeker
+GlebFrmCmp@mail.ru Gleb2IsBeb Employer

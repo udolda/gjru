@@ -58,11 +58,11 @@
                     @Html.ActionLink("Изменить статус", "ChangeStatus", "Employer", new { id = item.Id }, null)
                 </td>
                 <td></td>
-                    @if (Model.Role == role.Employee)
+                    @if (Model.Role == role.Employer)
                      {
                         <td>
                             @Html.ActionLink("Редактировать вакансию", "EditVacancy", "Employer", new { id = item.Id }, null) |
-                            @Html.ActionLink("Поиск кандидатов", "FindCandidate", "employer", new { id = item.Id }, null)
+                            @Html.ActionLink("Поиск кандидатов", "FindCandidate", "Employer", new { id = item.Id }, null)
                         </td>
                      }
             </tr>

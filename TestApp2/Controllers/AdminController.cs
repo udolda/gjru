@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestApp2.Models;
 using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
-        private UserRepository userRepository;
+        private EmployerRepository employerRepository;
+
+        public AdminController(EmployerRepository employerRepository,
+            UserRepository userRepository, ExperienceRepository experienceRepository)
+            : base(userRepository, experienceRepository)
+        {
+            this.employerRepository = employerRepository;
+            this.userRepository = userRepository;
+        }
 
         /// <summary>
         /// Возвращает главное меню администратора
@@ -17,84 +26,40 @@ namespace TestApp2.Controllers
         /// <returns>Main view</returns>
         public ActionResult Main()
         {
-            if (userRepository.FindByLogin("admin@gmail.com").Password == "Gibibl666")
-            {
-
-            }
-
             return View();
         }
 
-        // GET: Admin/Details/5
-        public ActionResult Details(int id)
+        /// <summary>
+        /// Метод отображения списка пользователей
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public ActionResult ShowUsers(FetchOptions options)
         {
-            return View();
+            var model = new UserListViewModel
+            {
+                Users = userRepository.GetAllWithSort(options)
+            };
+
+            return View(model);
         }
 
-        // GET: Admin/Create
-        public ActionResult Create()
+        /// <summary>
+        /// Метод передает во вью данные о пользователе для его изменения
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ActionResult EditUser(long Id)
         {
-            return View();
-        }
-
-        // POST: Admin/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            var current = userRepository.Load(Id);
+            var model = new RegistrationViewModel
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Admin/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Admin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                Entity = current,
+                Email = current.UserName,
+                Password = current.Password,
+                Role = current.Role
+            };
+            return View(model);
         }
     }
 }

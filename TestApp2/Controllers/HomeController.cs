@@ -67,10 +67,11 @@ namespace TestApp2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegistrationViewModel model)
         {
-            if (userRepository.FindByLogin("admin@gmail.com") == null)
+            if (userRepository.FindByLogin("adminGJRU@mail.ru") == null)
             {
-                var user = new User { UserName = "admin@gmail.com", Password = "Gibibl666", Role = role.Admin };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                RegistrationViewModel modelAdmin = new RegistrationViewModel {Email= "adminGJRU@mail.ru", Password= "Gibibl666",passwordConfirm= "Gibibl666", Role=role.Admin };
+                var userAdmin = new User { UserName = modelAdmin.Email, Password = modelAdmin.Password, Role = modelAdmin.Role };
+                var result = await UserManager.CreateAsync(userAdmin, modelAdmin.Password);
             }
 
             if (ModelState.IsValid)

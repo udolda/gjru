@@ -49,7 +49,7 @@ namespace TestApp2.Controllers
 
             switch (CurrentUser.Role)
             {
-                case role.Employee:
+                case role.Employer:
                     {
                         model.Vacancies = employerRepository.ShowMyVacancies(CurrentUser.Id, filter, options);
                         return View(model);

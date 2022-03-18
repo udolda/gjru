@@ -12,7 +12,7 @@ namespace TestApp2.Models
     }
 
 
-    public class RegistrationViewModel
+    public class RegistrationViewModel : EntityModel<User>
     {
         public RegistrationViewModel()
         {
@@ -54,5 +54,15 @@ namespace TestApp2.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+    }
+
+
+    public class UserListViewModel : EntityModel<List<User>>
+    {
+        public IList<User> Users { get; set; }
+        public UserListViewModel()
+        {
+            Users = new List<User>();
+        }
     }
 }

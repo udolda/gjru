@@ -12,7 +12,7 @@ namespace TestApp2.Models
         Admin = 0,
         HR = 1,
         Jobseeker = 2,
-        Employee = 3
+        Employer = 3
     }
 
     public class User : IUser<long>

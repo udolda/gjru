@@ -23,7 +23,7 @@
                 @if (Request.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Информация", "About", "Home")</li>
+                        <li>@Html.ActionLink("О разработчике", "About", "Home")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 }
@@ -31,7 +31,7 @@
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Домашняя страница", "Login", "Home")</li>
-                        <li>@Html.ActionLink("Информация", "About", "Home")</li>
+                        <li>@Html.ActionLink("О разработчике", "About")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 }
