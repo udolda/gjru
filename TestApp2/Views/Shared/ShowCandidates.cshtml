@@ -1,0 +1,65 @@
+﻿@model TestApp2.Models.ProfileListViewModel
+@using TestApp2.Extensions;
+
+@{ ViewBag.Title = "Список кандидатов"; }
+
+<h2>Список кандидатов</h2>
+
+<table class="table" border="1" align="center">
+    <tr>
+        @if (Model.Profiles.Count() != 0)
+         {
+            <td>
+                @Html.SortLink("Имя", "Name", "ShowCandidates", "Common", new RouteValueDictionary { { "id", Model.Profiles[0].Id } })
+            </td>
+            <td>
+                @Html.SortLink("Дата роджения", "DateofBirth", "ShowCandidates", "Common", new RouteValueDictionary { { "id", Model.Profiles[0].Id } })
+            </td>
+            <td>
+                @Html.SortLink("Опыт", "Experience", "ShowCandidates", "Common", new RouteValueDictionary { { "id", Model.Profiles[0].Id } })
+            </td>
+            //нужна ли сортировка по опыту?
+            <td>
+                @Html.SortLink("Фото", "Avatar", "ShowCandidates", "Common", new RouteValueDictionary { { "id", Model.Profiles[0].Id } })
+            </td>
+            <td>
+                @Html.SortLink("Почта", "none", "ShowCandidates", "Common", new RouteValueDictionary { { "id", Model.Profiles[0].Id } })
+            </td>
+            <td>
+                @Html.SortLink("Телефон", "User.PhoneNumber", "ShowCandidates", "Common", new RouteValueDictionary { { "id", Model.Profiles[0].Id } })
+            </td>
+            <td></td>
+         }
+         else
+         {
+            @Html.Label("Похоже, что в системе пока нет сохраненных анкет");
+         }
+    </tr>
+
+    @foreach (var item in Model.Profiles)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.DateofBirth</td>
+            <td>
+                @foreach (var exp in item.Experience)
+                 {
+                    @exp.Skill
+                 }
+            </td>
+            @if (item.Avatar != null)
+             {
+                <td><img src=@(Url.Content(@"~\App_Data\Files\") + item.Avatar.Name) , type="file" name="Photo" /></td>
+             }
+             else
+             {
+                <td><img src=@(Url.Content(@"~\Content\Images\default.png")) ) , type="file" name="Photo" /></td>
+             }
+            <td>@item.User.UserName</td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Назад", "Redirect", "Common")
+</div>

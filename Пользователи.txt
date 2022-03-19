@@ -1,5 +1,10 @@
 Пользователи создаются для проверки работы системы.
 adminGJRU@mail.ru Gibibl666 Admin
+GlebFrmCmp@mail.ru Gleb2IsBeb Employer
+ValaFrmElm@mail.ru Vala9IsLia Employer
 Company@gmail.com Mic123Mic HR
 prostoStas@mail.ru Stas1IsSus Jobseeker
-GlebFrmCmp@mail.ru Gleb2IsBeb Employer
+prostoDima@mail.ru Dima3IsIma Jobseeker
+sloznoZhek@mail.ru Zhek4IsKek Jobseeker
+sloznoMark@mail.ru Mark4IsArk Jobseeker
+mamaLuba@gmail.com LubaDavai5 Jobseeker

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -45,7 +46,7 @@ namespace TestApp2.Controllers
         }
 
         /// <summary>
-        /// Метод передает во вью данные о пользователе для его изменения
+        /// Метод передает в представление данные о пользователе для его изменения
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
@@ -60,6 +61,40 @@ namespace TestApp2.Controllers
                 Role = current.Role
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(RegistrationViewModel model)
+        {
+            var user = new User
+            {
+                Id = model.Id,
+                Password = UserManager.PasswordHasher.HashPassword(model.Password),
+                Role = model.Role,
+                UserName = model.Email
+            };
+            userRepository.Save(user);
+            return RedirectToAction("ShowUsers", "Admin");
+        }
+
+        /// <summary>
+        /// Метод для блокировки пользователей
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ChangeStatus()
+        {
+            var Id = Convert.ToInt64(User.Identity.GetUserId());
+            var user = userRepository.Load(Id);
+            if (user.Status == Status.Active)
+            {
+                user.Status = Status.Blocked;
+            }
+            else
+            {
+                user.Status = Status.Active;
+            }
+            userRepository.Save(user);
+            return RedirectToAction("Main", "Admin");
         }
     }
 }

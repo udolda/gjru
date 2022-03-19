@@ -26,7 +26,10 @@ namespace TestApp2.Controllers
             this.jobseekerRepository = jobseekerRepository;
         }
 
-        //править. Переделать под переход на Main страницу роли
+        /// <summary>
+        /// Метод. Перенаправляет на главную страницу роли
+        /// </summary>
+        /// <returns>Main представление роли</returns>
         public ActionResult Redirect()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();

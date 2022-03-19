@@ -24,5 +24,7 @@ namespace TestApp2.Models
         public virtual role Role { get; set; }
 
         public virtual string UserName { get; set; }
+
+        public virtual Status Status { get; set; }
     }
 }

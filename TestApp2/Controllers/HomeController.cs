@@ -208,7 +208,6 @@ namespace TestApp2.Controllers
         //    return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         //}
 
-        //править
         ////
         //// POST: /Account/VerifyCode
         //[HttpPost]
@@ -256,16 +255,14 @@ namespace TestApp2.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
+        ////править
+        //// GET: /Account/ForgotPassword
+        //[AllowAnonymous]
+        //public ActionResult ForgotPassword()
+        //{
+        //    return View();
+        //}
 
-        //править
-        ////
         //// POST: /Account/ForgotPassword
         //[HttpPost]
         //[AllowAnonymous]
@@ -293,29 +290,27 @@ namespace TestApp2.Controllers
         //    return View(model);
         //}
 
-        /// <summary>
-        /// GET: /Account/ForgotPasswordConfirmation
-        /// </summary>
-        /// <returns></returns>
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
+        ///// <summary>
+        ///// GET: /Account/ForgotPasswordConfirmation
+        ///// </summary>
+        ///// <returns></returns>
+        //[AllowAnonymous]
+        //public ActionResult ForgotPasswordConfirmation()
+        //{
+        //    return View();
+        //}
 
-        /// <summary>
-        /// GET: /Account/ResetPassword
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
-        {
-            return code == null ? View("Error") : View();
-        }
+        ///// <summary>
+        ///// GET: /Account/ResetPassword
+        ///// </summary>
+        ///// <param name="code"></param>
+        ///// <returns></returns>
+        //[AllowAnonymous]
+        //public ActionResult ResetPassword(string code)
+        //{
+        //    return code == null ? View("Error") : View();
+        //}
 
-        //править
-        ////
         //// POST: /Account/ResetPassword
         //[HttpPost]
         //[AllowAnonymous]
@@ -341,26 +336,25 @@ namespace TestApp2.Controllers
         //    return View();
         //}
 
-        /// <summary>
-        /// GET: /Account/ResetPasswordConfirmation
-        /// </summary>
-        /// <returns></returns>
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
+        ///// <summary>
+        ///// GET: /Account/ResetPasswordConfirmation
+        ///// </summary>
+        ///// <returns></returns>
+        //[AllowAnonymous]
+        //public ActionResult ResetPasswordConfirmation()
+        //{
+        //    return View();
+        //}
 
-        //
         // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ExternalLogin(string provider, string returnUrl)
+        //{
+        //    // Request a redirect to the external login provider
+        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        //}
 
         protected override void Dispose(bool disposing)
         {
