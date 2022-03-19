@@ -67,6 +67,11 @@ namespace TestApp2.Controllers
                         model.Vacancies = employerRepository.GetAllWithSort(options);
                         return View(model);
                     }
+                case role.HR:
+                    {
+                        model.Vacancies = employerRepository.GetAllWithSort(options);
+                        return View(model);
+                    }
             }
             return View();
         }

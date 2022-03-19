@@ -20,8 +20,8 @@ namespace TestApp2.Models
         [Display(Name = "Окончание")]
         public DateTime Ends { get; set; }
 
-        [Display(Name = "Выберите название компании")]
         public List<SelectListItem> Company { get; set; }
+        [Display(Name = "Выберите название компании")]
         public string SelectedCompany { get; set; }
         [Display(Name = "Выберите требуемые навыки из списка")]
         public List<SelectListItem> Experience { get; set; }

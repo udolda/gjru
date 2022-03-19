@@ -238,24 +238,23 @@ namespace TestApp2.Controllers
         //    }
         //}
 
-        /// <summary>
-        /// GET: /Account/ConfirmEmail
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(long userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
+        ///// <summary>
+        ///// GET: /Account/ConfirmEmail
+        ///// </summary>
+        ///// <param name="userId"></param>
+        ///// <param name="code"></param>
+        ///// <returns></returns>
+        //[AllowAnonymous]
+        //public async Task<ActionResult> ConfirmEmail(long userId, string code)
+        //{
+        //    if (userId == null || code == null)
+        //    {
+        //        return View("Error");
+        //    }
+        //    var result = await UserManager.ConfirmEmailAsync(userId, code);
+        //    return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        //}
 
-        ////править
         //// GET: /Account/ForgotPassword
         //[AllowAnonymous]
         //public ActionResult ForgotPassword()
