@@ -16,9 +16,9 @@
             <td>
                 @Html.SortLink("Имя пользователя", "UserName", "ShowUsers", "Admin", new RouteValueDictionary { })
             </td>
-            <td>
+            @*<td>
                 @Html.SortLink("Номер телефона", "PhoneNumber", "ShowUsers", "Admin", new RouteValueDictionary { })
-            </td>
+            </td>*@
             <td>
                 @Html.SortLink("Роль", "Role", "ShowUsers", "Admin", new RouteValueDictionary { })
             </td>
@@ -38,15 +38,16 @@
     {
         <tr>
             <td>@item.UserName</td>
+            @*<td>@item.PhoneNumber</td>*@
             <td>@item.Role</td>
             <td>
                 @item.Status
                 <br />
                 @Html.ActionLink("изменить статус", "ChangeStatus")
             </td>
-                <td>
-                    @Html.ActionLink("Редактировать пользователя", "EditUser", new { id = item.Id }) |
-                </td>
+            <td>
+                @Html.ActionLink("Редактировать пользователя", "EditUser", new { id = item.Id }) |
+            </td>
         </tr>
     }
 

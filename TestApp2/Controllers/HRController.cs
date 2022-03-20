@@ -15,8 +15,8 @@ namespace TestApp2.Controllers
         private CompanyRepository companyRepository;
 
         public HRController(EmployerRepository employerRepository,
-            JobseekerRepository jobseekerRepository,CompanyRepository companyRepository, UserRepository userRepository,
-            ExperienceRepository experienceRepository)
+            JobseekerRepository jobseekerRepository,CompanyRepository companyRepository,
+            UserRepository userRepository, ExperienceRepository experienceRepository)
             : base(userRepository, experienceRepository)
         {
             this.employerRepository = employerRepository;
@@ -30,6 +30,10 @@ namespace TestApp2.Controllers
         /// <returns>Main view</returns>
         public ActionResult Main()
         {
+            var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
+            if (CurrentUser.Role != Models.role.HR)
+                return RedirectToAction("AccessError", "Common");
+
             return View();
         }
 

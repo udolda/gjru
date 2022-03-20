@@ -33,7 +33,7 @@
              }
              else
              {
-                @Html.Label("Похоже, что в системе пока нет сохраненных анкет");
+                @Html.Label("Похоже, что в системе пока нет сохраненных вакансий");
              }
         </tr>
 
@@ -60,7 +60,7 @@
                         @Html.ActionLink("Изменить статус", "ChangeStatus", "Employer", new { id = item.Id }, null)
                      }
                 </td>
-                <td></td>
+                @*<td></td>*@
                     @if (Model.Role == role.Employer || Model.Role == role.Admin)
                      {
                         <td>

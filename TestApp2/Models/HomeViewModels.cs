@@ -35,6 +35,9 @@ namespace TestApp2.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string passwordConfirm { get; set; }
 
+        //[Display(Name = "Ваш номер телефона")]
+        //public long PhoneNumber { get; set; }
+
         [Required]
         public role Role { get; set; }
     }

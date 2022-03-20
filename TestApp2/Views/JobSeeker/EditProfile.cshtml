@@ -75,7 +75,8 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
 
-<script type="text/javascript">$(function () {
+<script type="text/javascript">
+    $(function () {
             $('#DateOfBirth').datetimepicker({
                 //value: 'Model.Today',
                 defaultDate: 'Model.DateOfBirth',
@@ -90,4 +91,5 @@
             $("#setDate").click(function () {
                 $('#DateOfBirth').data("DateTimePicker").date(moment('15.11.2017', 'DD/MM/YYYY'));
             });
-        });</script>
+    });
+</script>

@@ -389,7 +389,6 @@
     <Compile Include="Models\JobseekerViewModel.cs" />
     <Compile Include="Models\SortLinkModel.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\TesterModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vacancy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -546,6 +545,8 @@
     <Content Include="Views\Admin\ShowUsers.cshtml" />
     <Content Include="Views\Employer\CreateVacancy.cshtml" />
     <Content Include="Views\Employer\EditVacancy.cshtml" />
+    <Content Include="Views\Shared\SortLink.cshtml" />
+    <Content Include="Views\Shared\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

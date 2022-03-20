@@ -27,6 +27,10 @@ namespace TestApp2.Controllers
         /// <returns>Main view</returns>
         public ActionResult Main()
         {
+            var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
+            if (CurrentUser.Role != Models.role.Admin)
+                return RedirectToAction("AccessError", "Common");
+
             return View();
         }
 
@@ -37,6 +41,10 @@ namespace TestApp2.Controllers
         /// <returns></returns>
         public ActionResult ShowUsers(FetchOptions options)
         {
+            var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
+            if (CurrentUser.Role != Models.role.Admin)
+                return RedirectToAction("AccessError", "Common");
+
             var model = new UserListViewModel
             {
                 Users = userRepository.GetAllWithSort(options)
@@ -59,6 +67,7 @@ namespace TestApp2.Controllers
                 Email = current.UserName,
                 Password = current.Password,
                 Role = current.Role
+                //PhoneNumber = current.PhoneNumber
             };
             return View(model);
         }
@@ -70,6 +79,7 @@ namespace TestApp2.Controllers
             {
                 Id = model.Id,
                 Password = UserManager.PasswordHasher.HashPassword(model.Password),
+                //PhoneNumber = model.PhoneNumber,
                 Role = model.Role,
                 UserName = model.Email
             };

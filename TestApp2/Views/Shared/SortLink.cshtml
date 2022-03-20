@@ -1,0 +1,16 @@
+﻿@model TestApp2.Models.SortLinkModel
+
+<a href="@Url.Action(Model.ActionName, Model.ControllerName, Model.RouteValues)">
+    @Model.LinkText
+    @if (Model.SortDirection.HasValue)
+    {
+        if (Model.SortDirection.Value == System.Web.UI.WebControls.SortDirection.Ascending)
+        {
+            <img src="~/Content/images/up.png" />
+        }
+        else
+        {
+            <img src="~/Content/images/down.png" />
+        }
+    }
+</a>

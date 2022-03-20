@@ -21,6 +21,8 @@ namespace TestApp2.Models
 
         public virtual string Password { get; set; }
 
+        //public virtual long PhoneNumber { get; set; }
+
         public virtual role Role { get; set; }
 
         public virtual string UserName { get; set; }

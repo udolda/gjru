@@ -34,6 +34,10 @@ namespace TestApp2.Controllers
         /// <returns>Main view</returns>
         public ActionResult Main()
         {
+            var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
+            if (CurrentUser.Role != Models.role.Jobseeker)
+                return RedirectToAction("AccessError", "Common");
+
             return View();
         }
 
@@ -43,6 +47,10 @@ namespace TestApp2.Controllers
         /// <returns></returns>
         public ActionResult CreateProfile()
         {
+            var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
+            if (CurrentUser.Role != Models.role.Jobseeker)
+                return RedirectToAction("AccessError", "Common");
+
             var model = new ProfileModel
             {
                 Experience = GetExperienceLists()

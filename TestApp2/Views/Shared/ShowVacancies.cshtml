@@ -10,6 +10,8 @@
     @Html.Partial("VacancyFilter", new VacancyFilter())
 </div>
 
+<p><hr /></p>
+
 <p>
     @if (Model.Role == role.Employer)
     {
@@ -20,6 +22,8 @@
 <div>
     @Html.Partial("VacanciesTable", Model)
 </div>
+
+<p><hr /></p>
 
 <div>
     @Html.ActionLink("Назад", "Redirect", "Common")
