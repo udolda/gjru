@@ -16,10 +16,12 @@ namespace TestApp2.Controllers
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
         private UserRepository userRepository;
+        private CompanyRepository companyRepository;
 
-        public HomeController(UserRepository userRepository)
+        public HomeController(UserRepository userRepository, CompanyRepository companyRepository)
         {
             this.userRepository = userRepository;
+            this.companyRepository = companyRepository;
         }
 
         public ApplicationSignInManager SignInManager
@@ -74,15 +76,19 @@ namespace TestApp2.Controllers
                 var result = await UserManager.CreateAsync(userAdmin, modelAdmin.Password);
             }
 
-            if (model.Role == role.Employer && model.Company == null)
+            if (model.Role == role.Employer && model.UserCompany == null)
                 return View(model);
 
-            Company userCompany = new Company { CompanyName = model.Company };
-            //if()
+            Company userCompany = companyRepository.GetCompany(model.UserCompany);
+            if (userCompany == null)
+            {
+                userCompany = new Company { CompanyName = model.UserCompany };
+                companyRepository.Save(userCompany);
+            }
 
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role, UserCompany = model.Company };
+                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role, UserCompany = userCompany };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

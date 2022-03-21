@@ -13,7 +13,7 @@ namespace TestApp2.Mappings
         {
             Id(u => u.Id).GeneratedBy.Identity();
             Map(u => u.UserName).Length(30);
-            Map(u => u.UserCompany).Length(30);
+            References(u => u.UserCompany);
             Map(u => u.Password).Column("PasswordHash");
             //Map(u => u.PhoneNumber);
             Map(u => u.Role).Nullable();

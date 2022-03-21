@@ -9,15 +9,15 @@
         $(document).ready(function () {
             $('#rbJobseeker').click(function () {
                 $('#lblCompanyEnter').hide();
-                $('#CompanyEnter').hide();
+                $('#UserCompany').hide();
             });
             $('#rbHR').click(function () {
                 $('#lblCompanyEnter').hide();
-                $('#CompanyEnter').hide();
+                $('#UserCompany').hide();
             });
             $('#rbEmployer').click(function () {
                 $('#lblCompanyEnter').show();
-                $('#CompanyEnter').show();
+                $('#UserCompany').show();
             });
         });
     </script>
@@ -26,11 +26,11 @@
         $(function () {
             $('#registerbtn').click(function () {
                 if ($('#rbEmployer').is(':checked'))
-                    $('#CompanyEnter').prop({ required: true });
+                    $('#UserCompany').prop({ required: true });
                 else if ($('#rbJobseeker').is(':checked'))
-                    $('#CompanyEnter').prop({ required: false });
+                    $('#UserCompany').prop({ required: false });
                 else if ($('#rbHR').is(':checked'))
-                    $('#CompanyEnter').prop({ required: false });
+                    $('#UserCompany').prop({ required: false });
             });
         });
     </script>
@@ -108,7 +108,7 @@
             <p>Пожалуйста заполните эту форму, чтобы создать аккаунт.</p>
             <hr>
 
-            <label for="email"><b>Email</b></label>
+            <label for="Email"><b>Email</b></label>
             <input type="text" placeholder="Введите Email" name="Email" required>
 
             <label for="psw"><b>Пароль</b></label>
@@ -117,8 +117,8 @@
             <label for="psw-repeat"><b>Повторите пароль</b></label>
             <input type="password" placeholder="Повторите пароль" name="passwordConfirm" required>
 
-            <label for="company" id="lblCompanyEnter" style="display: none"><b>Имя компании</b></label>
-            <input type="text" placeholder="Введите имя компании" id="CompanyEnter" name="CompanyEnter" style="display: none">
+            <label for="UserCompany" id="lblCompanyEnter" style="display: none"><b>Имя компании</b></label>
+            <input type="text" placeholder="Введите имя компании" id="UserCompany" name="UserCompany" style="display: none">
 
         </div>
 

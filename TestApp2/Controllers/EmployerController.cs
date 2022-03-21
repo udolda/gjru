@@ -101,7 +101,7 @@ namespace TestApp2.Controllers
                     VacancyName = model.Name,
                     Status = Status.Active,
                     VacancyDescription = model.Description,
-                    Company = companyRepository.Load(long.Parse(model.SelectedCompany)),
+                    Company = CurrentUser.UserCompany, //companyRepository.Load(long.Parse(model.SelectedCompany)),
                     Requirements = experienceRepository.GetSelectedExperience(IdList)
                 };
                 try

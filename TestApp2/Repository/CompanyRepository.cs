@@ -24,7 +24,7 @@ namespace TestApp2.Repository
         public Company GetCompany(string selected)
         {
             var crit = session.CreateCriteria<Company>();
-            crit.Add(Restrictions.Eq("Company.CompanyName", selected));
+            crit.Add(Restrictions.Eq("CompanyName", selected));
             return crit.List<Company>().FirstOrDefault();
         }
     }

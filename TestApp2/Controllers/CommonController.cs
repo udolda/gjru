@@ -54,6 +54,7 @@ namespace TestApp2.Controllers
             {
                 case role.Employer:
                     {
+                        filter.CompanyName = CurrentUser.UserCompany;
                         model.Vacancies = employerRepository.ShowMyVacancies(CurrentUser.Id, filter, options);
                         return View(model);
                     }
