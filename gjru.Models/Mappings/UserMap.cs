@@ -1,13 +1,14 @@
-﻿using System;
+﻿using FluentNHibernate.Mapping;
+using gjru.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using FluentNHibernate.Mapping;
-using TestApp2.Models;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TestApp2.Mappings
+namespace gjru.Models.Mappings
 {
-    public class UserMap:ClassMap<User>
+    public class UserMap : ClassMap<User>
     {
         public UserMap()
         {

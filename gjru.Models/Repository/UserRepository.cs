@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using gjru.Models.Filters;
+using gjru.Models.Models;
+using Microsoft.AspNet.Identity;
 using NHibernate;
 using NHibernate.Criterion;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
-using TestApp2.Filters;
-using TestApp2.Models;
 
-namespace TestApp2.Repository
+namespace gjru.Models.Repository
 {
     public class UserRepository : Repository<User, JobseekersFilter>
     {

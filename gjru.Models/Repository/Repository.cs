@@ -1,4 +1,4 @@
-﻿using TestApp2.Filters;
+﻿using gjru.Models.Filters;
 using NHibernate;
 using NHibernate.Criterion;
 using System;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 
-namespace TestApp2.Repository
+namespace gjru.Models.Repository
 {
     public class Repository<T, FT>
        where T : class

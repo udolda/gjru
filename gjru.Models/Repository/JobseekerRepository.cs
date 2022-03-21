@@ -1,13 +1,14 @@
-﻿using NHibernate;
+﻿using gjru.Models.Filters;
+using gjru.Models.Models;
+using NHibernate;
 using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using TestApp2.Filters;
-using TestApp2.Models;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TestApp2.Repository
+namespace gjru.Models.Repository
 {
     public class JobseekerRepository : Repository<Candidate, JobseekersFilter>
     {
@@ -39,7 +40,7 @@ namespace TestApp2.Repository
             var crit = session.CreateCriteria<Candidate>()
                 .CreateAlias("Experience", "CandidateExperience")
                 .Add(Restrictions.In("CandidateExperience.id", experiences));
-            
+
             return crit.List<Candidate>();
         }
 

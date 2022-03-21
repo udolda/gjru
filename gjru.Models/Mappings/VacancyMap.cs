@@ -1,11 +1,12 @@
 ﻿using FluentNHibernate.Mapping;
-using TestApp2.Models;
+using gjru.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TestApp2.Mappings
+namespace gjru.Models.Mappings
 {
     public class VacancyMap : ClassMap<Vacancy>
     {
