@@ -4,6 +4,38 @@
 }
 @model RegistrationViewModel
 
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#rbJobseeker').click(function () {
+                $('#lblCompanyEnter').hide();
+                $('#CompanyEnter').hide();
+            });
+            $('#rbHR').click(function () {
+                $('#lblCompanyEnter').hide();
+                $('#CompanyEnter').hide();
+            });
+            $('#rbEmployer').click(function () {
+                $('#lblCompanyEnter').show();
+                $('#CompanyEnter').show();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#registerbtn').click(function () {
+                if ($('#rbEmployer').is(':checked'))
+                    $('#CompanyEnter').prop({ required: true });
+                else if ($('#rbJobseeker').is(':checked'))
+                    $('#CompanyEnter').prop({ required: false });
+                else if ($('#rbHR').is(':checked'))
+                    $('#CompanyEnter').prop({ required: false });
+            });
+        });
+    </script>
+}
+
 <head>
     <style>
 
@@ -85,27 +117,30 @@
             <label for="psw-repeat"><b>Повторите пароль</b></label>
             <input type="password" placeholder="Повторите пароль" name="passwordConfirm" required>
 
+            <label for="company" id="lblCompanyEnter" style="display: none"><b>Имя компании</b></label>
+            <input type="text" placeholder="Введите имя компании" id="CompanyEnter" name="CompanyEnter" style="display: none">
 
         </div>
 
         <div>
             <label>Соискатель</label>
-            @Html.RadioButtonFor(m => m.Role, "Jobseeker")
+            @Html.RadioButtonFor(m => m.Role, "Jobseeker", htmlAttributes: new { @id = "rbJobseeker", @name = "role" })
             <label>Рекрутер</label>
-            @Html.RadioButtonFor(m => m.Role, "HR")
+            @Html.RadioButtonFor(m => m.Role, "HR", htmlAttributes: new { @id = "rbHR", @name = "role" })
             <label>Работодатель</label>
-            @Html.RadioButtonFor(m => m.Role, "Employer")
+            @Html.RadioButtonFor(m => m.Role, "Employer", htmlAttributes: new { @id = "rbEmployer", @name = "role" })
         </div>
 
         <div>
             <hr>
             <p>Создавая аккаунт вы соглашаетеь с нашей <a href="#">Политикой конфиденциальности</a>.</p>
 
-            <button type="submit" class="registerbtn" formaction="/Home/Register">Зарегистрироваться</button>
+            <button type="submit" id="registerbtn" class="registerbtn" formaction="/Home/Register">Зарегистрироваться</button>
         </div>
 
         <div class="containerForm signin">
             <p>Уже есть аккаунт? <a href="/Home/Login">Войдите</a>.</p>
         </div>
+
     </form>
 }

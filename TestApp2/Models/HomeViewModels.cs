@@ -38,6 +38,8 @@ namespace TestApp2.Models
         //[Display(Name = "Ваш номер телефона")]
         //public long PhoneNumber { get; set; }
 
+        public string Company { get; set; }
+
         [Required]
         public role Role { get; set; }
     }

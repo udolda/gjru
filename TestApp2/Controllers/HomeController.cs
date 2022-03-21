@@ -74,9 +74,15 @@ namespace TestApp2.Controllers
                 var result = await UserManager.CreateAsync(userAdmin, modelAdmin.Password);
             }
 
+            if (model.Role == role.Employer && model.Company == null)
+                return View(model);
+
+            Company userCompany = new Company { CompanyName = model.Company };
+            //if()
+
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role };
+                var user = new User { UserName = model.Email, Password = model.Password, Role = model.Role, UserCompany = model.Company };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

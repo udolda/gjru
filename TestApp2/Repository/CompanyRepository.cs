@@ -19,7 +19,7 @@ namespace TestApp2.Repository
         /// <summary>
         /// Метод получает значение компании по ее названию
         /// </summary>
-        /// <param name="selected"></param>
+        /// <param name="selected">Company Name</param>
         /// <returns></returns>
         public Company GetCompany(string selected)
         {

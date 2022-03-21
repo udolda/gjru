@@ -28,5 +28,7 @@ namespace TestApp2.Models
         public virtual string UserName { get; set; }
 
         public virtual Status Status { get; set; }
+
+        public virtual string UserCompany { get; set; }
     }
 }
