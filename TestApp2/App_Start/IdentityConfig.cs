@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using gjru.Models.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using NHibernate;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using TestApp2.App_Start;
-using TestApp2.Models;
+//using TestApp2.Models;
 
 namespace TestApp2
 {
@@ -43,7 +41,8 @@ namespace TestApp2
         /// 
         /// </summary>
         /// <param name="store"></param>
-        public UserManager(IUserStore<User, long> store) : base(store)
+        public UserManager(IUserStore<User, long> store) :
+            base(store)
         {
 
         }
@@ -100,6 +99,7 @@ namespace TestApp2
             }
             return manager;
         }
+
     }
 
 
@@ -113,7 +113,8 @@ namespace TestApp2
         /// </summary>
         /// <param name="userManager"></param>
         /// <param name="authenticationManager"></param>
-        public ApplicationSignInManager(UserManager userManager, IAuthenticationManager authenticationManager)
+        public ApplicationSignInManager(UserManager userManager,
+            IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
 
@@ -136,6 +137,7 @@ namespace TestApp2
         {
             return new ApplicationSignInManager(context.GetUserManager<UserManager>(), context.Authentication);
         }
+
     }
 }
 
@@ -145,5 +147,6 @@ namespace TestApp2.App_Start
 {
     public class IdentityConfig
     {
+
     }
 }

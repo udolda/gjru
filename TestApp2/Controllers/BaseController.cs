@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TestApp2.Models;
-using TestApp2.Repository;
+using gjru.Models.Models;
+//using TestApp2.Models;
+using gjru.Models.Repository;
+//using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {

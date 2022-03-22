@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gjru.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace TestApp2.Models
 
         [Display(Name = "Если ваших навыков нет в списке, введите их через ;")]
         public string NewExperience { get; set; }
+
     }
 
 
@@ -44,5 +46,8 @@ namespace TestApp2.Models
         {
             Vacancies = new List<Vacancy>();
         }
+
     }
+
+
 }

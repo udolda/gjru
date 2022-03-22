@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gjru.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,14 +29,18 @@ namespace TestApp2.Models
         [DataType(DataType.Text)]
         [Display(Name = "Фото")]
         public BinaryFile File { get; set; }
+
     }
+
 
     public class ProfileListViewModel : EntityModel<List<Candidate>>
     {
         public IList<Candidate> Profiles { get; set; }
+
         public ProfileListViewModel()
         {
             Profiles = new List<Candidate>();
         }
+
     }
 }

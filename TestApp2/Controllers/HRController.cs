@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using gjru.Models.Repository;
+using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
@@ -31,7 +29,7 @@ namespace TestApp2.Controllers
         public ActionResult Main()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.HR)
+            if (CurrentUser.Role != gjru.Models.Models.role.HR)
                 return RedirectToAction("AccessError", "Common");
 
             return View();

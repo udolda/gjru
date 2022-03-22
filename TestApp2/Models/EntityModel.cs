@@ -9,5 +9,6 @@ namespace TestApp2.Models
     {
         public T Entity { get; set; }
         public long Id { get; set; }
+
     }
 }

@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using gjru.Models.Models;
+using gjru.Models.Repository;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TestApp2.Models;
-using TestApp2.Repository;
+//using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
@@ -14,7 +16,8 @@ namespace TestApp2.Controllers
         private EmployerRepository employerRepository;
 
         public AdminController(EmployerRepository employerRepository,
-            UserRepository userRepository, ExperienceRepository experienceRepository)
+            UserRepository userRepository,
+            ExperienceRepository experienceRepository)
             : base(userRepository, experienceRepository)
         {
             this.employerRepository = employerRepository;
@@ -28,7 +31,7 @@ namespace TestApp2.Controllers
         public ActionResult Main()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.Admin)
+            if (CurrentUser.Role != gjru.Models.Models.role.Admin)
                 return RedirectToAction("AccessError", "Common");
 
             return View();
@@ -42,7 +45,7 @@ namespace TestApp2.Controllers
         public ActionResult ShowUsers(FetchOptions options)
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.Admin)
+            if (CurrentUser.Role != gjru.Models.Models.role.Admin)
                 return RedirectToAction("AccessError", "Common");
 
             var model = new UserListViewModel
@@ -106,5 +109,6 @@ namespace TestApp2.Controllers
             userRepository.Save(user);
             return RedirectToAction("Main", "Admin");
         }
+
     }
 }

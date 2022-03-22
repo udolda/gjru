@@ -100,7 +100,7 @@
 </head>
 
 @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+ {
     @Html.AntiForgeryToken()
     <form>
         <div class="container">
@@ -143,4 +143,4 @@
         </div>
 
     </form>
-}
+ }

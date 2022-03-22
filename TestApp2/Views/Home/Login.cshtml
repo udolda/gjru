@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "gj.ru";
 }
+
 @model LoginViewModel
 @*@Html.ValidationSummary(true)*@
 
@@ -10,7 +11,7 @@
     <p align="right" class="lead"> by SeaRune </p>
 
     @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
+     {
         @Html.AntiForgeryToken()
         <div class="wrap-login" align="center">
             <form class="login-form validate-form">
@@ -43,6 +44,6 @@
                 </div>
             </form>
         </div>
-    }
+     }
 
 </div>

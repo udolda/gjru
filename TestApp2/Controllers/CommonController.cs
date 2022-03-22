@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using gjru.Models.Filters;
+using gjru.Models.Models;
+using gjru.Models.Repository;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using TestApp2.Filters;
 using TestApp2.Models;
-using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
@@ -52,23 +52,23 @@ namespace TestApp2.Controllers
 
             switch (CurrentUser.Role)
             {
-                case role.Employer:
+                case gjru.Models.Models.role.Employer:
                     {
                         filter.CompanyName = CurrentUser.UserCompany;
                         model.Vacancies = employerRepository.ShowMyVacancies(CurrentUser.Id, filter, options);
                         return View(model);
                     }
-                case role.Admin:
+                case gjru.Models.Models.role.Admin:
                     {
                         model.Vacancies = employerRepository.GetAllWithSort(options);
                         return View(model);
                     }
-                case role.Jobseeker:
+                case gjru.Models.Models.role.Jobseeker:
                     {
                         model.Vacancies = employerRepository.GetAllWithSort(options);
                         return View(model);
                     }
-                case role.HR:
+                case gjru.Models.Models.role.HR:
                     {
                         model.Vacancies = employerRepository.GetAllWithSort(options);
                         return View(model);

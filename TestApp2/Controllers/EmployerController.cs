@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using gjru.Models.Models;
+using gjru.Models.Repository;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TestApp2.Models;
-using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
@@ -32,7 +32,7 @@ namespace TestApp2.Controllers
         public ActionResult Main()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.Employer)
+            if (CurrentUser.Role != gjru.Models.Models.role.Employer)
                 return RedirectToAction("AccessError", "Common");
 
             return View();
@@ -64,7 +64,7 @@ namespace TestApp2.Controllers
         public ActionResult CreateVacancy()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.Employer)
+            if (CurrentUser.Role != gjru.Models.Models.role.Employer)
                 return RedirectToAction("AccessError", "Common");
 
             var model = new VacancyViewModel

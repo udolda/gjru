@@ -14,5 +14,6 @@ namespace TestApp2.Models
         public string ControllerName { get; set; }
         public RouteValueDictionary RouteValues { get; set; }
         public SortDirection? SortDirection { get; set; }
+
     }
 }

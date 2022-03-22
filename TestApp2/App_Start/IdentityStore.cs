@@ -1,14 +1,9 @@
-﻿//using Agency.Extensions;
-//using Agency.Models.Models;
-//using Agency.Models.Repository;
+﻿using gjru.Models.Models;
 using Microsoft.AspNet.Identity;
 using NHibernate;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-using TestApp2.Models;
 
 namespace TestApp2.App_Start
 {
@@ -181,5 +176,6 @@ namespace TestApp2.App_Start
         {
             throw new NotImplementedException();
         }
+
     }
 }

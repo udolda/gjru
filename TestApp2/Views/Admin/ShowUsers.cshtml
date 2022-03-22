@@ -1,7 +1,9 @@
 ﻿@model TestApp2.Models.UserListViewModel
 @using TestApp2.Extensions;
-@using TestApp2.Models;
-@{ ViewBag.Title = "Список пользователей"; }
+
+@{
+    ViewBag.Title = "Список пользователей";
+ }
 
 <h2>Список пользователей</h2>
 
@@ -25,8 +27,6 @@
             <td>
                 @Html.SortLink("Статус пользователя", "Status", "ShowUsers", "Admin", new RouteValueDictionary { })
             </td>
-
-
         }
         else
         {

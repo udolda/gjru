@@ -8,9 +8,9 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 @using (Html.BeginForm("EditProfile", "Jobseeker", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+ {
 
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
                     <hr />
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-}
+ }
 
 <div>
     @Html.ActionLink("Назад", "Main")

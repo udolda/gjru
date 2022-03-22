@@ -6,8 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using gjru.Models.Models;
+//using TestApp2.Models;
+using gjru.Models.Repository;
+//using TestApp2.Repository;
 using TestApp2.Models;
-using TestApp2.Repository;
+
 
 namespace TestApp2.Controllers
 {
@@ -35,7 +39,7 @@ namespace TestApp2.Controllers
         public ActionResult Main()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.Jobseeker)
+            if (CurrentUser.Role != gjru.Models.Models.role.Jobseeker)
                 return RedirectToAction("AccessError", "Common");
 
             return View();
@@ -48,10 +52,10 @@ namespace TestApp2.Controllers
         public ActionResult CreateProfile()
         {
             var role = UserManager.GetRoles(Convert.ToInt64(User.Identity.GetUserId())).SingleOrDefault();
-            if (CurrentUser.Role != Models.role.Jobseeker)
+            if (CurrentUser.Role != gjru.Models.Models.role.Jobseeker)
                 return RedirectToAction("AccessError", "Common");
 
-            var model = new ProfileModel
+            var model = new Models.ProfileModel
             {
                 Experience = GetExperienceLists()
             };
@@ -59,7 +63,7 @@ namespace TestApp2.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateProfile(ProfileModel model)
+        public async Task<ActionResult> CreateProfile(Models.ProfileModel model)
         {
             if (ModelState.IsValid)
             {
@@ -144,7 +148,7 @@ namespace TestApp2.Controllers
                     file.Name = profile.Avatar.Name;
                     file.Path = profile.Avatar.Path;
                 }
-                var model = new ProfileModel
+                var model = new Models.ProfileModel
                 {
                     Entity = profile,
                     Id = profile.Id,
@@ -166,7 +170,7 @@ namespace TestApp2.Controllers
         ///
         /// </summary>
         /// <returns></returns>
-        public ActionResult EditProfile(ProfileModel model)
+        public ActionResult EditProfile(Models.ProfileModel model)
         {
             if (ModelState.IsValid)
             {

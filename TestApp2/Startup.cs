@@ -1,6 +1,8 @@
 ﻿using TestApp2.Controllers;
-using TestApp2.Repository;
-using TestApp2.Models;
+using gjru.Models.Repository;
+//using TestApp2.Repository;
+using gjru.Models.Models;
+//using TestApp2.Models;
 using Autofac;
 using Autofac.Integration.Mvc;
 using FluentNHibernate.Cfg;

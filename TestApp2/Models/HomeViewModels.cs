@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gjru.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace TestApp2.Models
 
         [Required]
         public role Role { get; set; }
+
     }
 
 
@@ -60,15 +62,18 @@ namespace TestApp2.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
     }
 
 
     public class UserListViewModel : EntityModel<List<User>>
     {
         public IList<User> Users { get; set; }
+
         public UserListViewModel()
         {
             Users = new List<User>();
         }
+
     }
 }

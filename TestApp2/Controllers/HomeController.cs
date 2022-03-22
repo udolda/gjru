@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using gjru.Models.Models;
+using gjru.Models.Repository;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
@@ -7,7 +9,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TestApp2.Models;
-using TestApp2.Repository;
 
 namespace TestApp2.Controllers
 {
@@ -182,17 +183,6 @@ namespace TestApp2.Controllers
             ViewBag.Message = "Поддробности";
 
             return View();
-        }
-
-        /// <summary>
-        /// Вовзвращает Manage отображение
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Manage()
-        {
-            ViewBag.HasAccess = Session["access"];
-            
-            return View("Manage");
         }
 
         /// <summary>
